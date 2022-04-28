@@ -57,41 +57,80 @@
                         <button class="btn btn-outline-success" type="submit">Search</button>
                     </form>
 
-                    <a href="" class="btn btn-outline-success mx-1">Login</a>
                     <a href="" class="btn btn-outline-success mx-1" data-bs-toggle="modal"
-                        data-bs-target="#exampleModal">Register</a>
+                        data-bs-target="#login">Login</a>
+                    <a href="" class="btn btn-outline-success mx-1" data-bs-toggle="modal"
+                        data-bs-target="#signup">Register</a>
                 </div>
             </div>
         </nav>
 
-        <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <!-- Return message -->
+        <div>
+            @if(Session::has('success'))
+            <div class="alert alert-success">{{Session::get('success')}}</div>
+            @endif
+            @if(Session::has('fail'))
+            <div class="alert alert-danger">{{Session::get('fail')}}</div>
+            @endif
+        </div>
+        <!-- Register Modal -->
+        <div class="modal fade" id="signup" tabindex="-1" aria-labelledby="signupModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Enter your details to register.</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Enter your details to sign up.</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form>
+                        <form action="signup" method="post">
+                            @csrf
                             <div class="mb-3">
-                                <label for="exampleInputEmail1" class="form-label">Email address</label>
-                                <input type="email" class="form-control" id="exampleInputEmail1"
+                                <label for="name" class="form-label">Enter name</label>
+                                <input type="text" name="name" class="form-control" id="name"
+                                    aria-describedby="nameHelp">
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Enter email address</label>
+                                <input type="email" name="email" class="form-control" id="email"
                                     aria-describedby="emailHelp">
-                                <div id="emailHelp" class="form-text">We'll never share your email with anyone else.
-                                </div>
                             </div>
                             <div class="mb-3">
-                                <label for="exampleInputPassword1" class="form-label">Password</label>
-                                <input type="password" class="form-control" id="exampleInputPassword1">
-                            </div>
-                            <div class="mb-3 form-check">
-                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                                <label for="password" class="form-label">Password</label>
+                                <input type="password" name="password" class="form-control" id="password">
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary">Save changes</button>
+                                <button type="submit" class="btn btn-primary">Sign up</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+                <!-- Login Modal -->
+                <div class="modal fade" id="login" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">Login here.</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="login" method="post">
+                            @csrf
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Enter email address</label>
+                                <input type="email" name="email" class="form-control" id="email"
+                                    aria-describedby="emailHelp">
+                            </div>
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Enter Password</label>
+                                <input type="password" name="password" class="form-control" id="password">
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Login</button>
                             </div>
                         </form>
                     </div>
